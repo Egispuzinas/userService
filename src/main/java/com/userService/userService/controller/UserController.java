@@ -23,7 +23,7 @@ public class UserController {
 
     @PostMapping(path = "/insertuser/", consumes = "application/json", produces = "application/json")
 
-    public void saveUser(@RequestBody User user) {
+    public void saveUser1(@RequestBody User user) {
         repository.save(user);
         return;
     }

@@ -4,6 +4,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,9 +15,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "t_user", schema = "public")
+@EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column (name = "f_id")
     private Long id;
 
@@ -25,6 +27,7 @@ public class User {
     //gali buti null
     @Column(name = "f_create_date")
     @CreatedDate
+    @GeneratedValue(strategy =  GenerationType.AUTO)
     private LocalDateTime date;
 
     @Column(name = "f_modified_date")
