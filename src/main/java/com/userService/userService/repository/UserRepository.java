@@ -9,8 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
+
     User findById(long id);
     List<User> findAll();
-    User save(User user);
+    User save(User usertoSave);
+    User deleteById(long id);
 }
 //Optional arba yra useris arba nera.

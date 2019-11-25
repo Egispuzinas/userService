@@ -5,6 +5,8 @@ import com.userService.userService.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.PostUpdate;
+
 @RestController
 public class UserController {
     @Autowired
@@ -17,15 +19,17 @@ public class UserController {
 
     @GetMapping("/search/{id}")
     public User search(@PathVariable long id) {
-        User user = repository.findById(id);
-        return user;
+        return repository.findById(id);
     }
 
     @PostMapping(path = "/insertuser/", consumes = "application/json", produces = "application/json")
+    public void saveUser(@RequestBody User user) {
+            repository.save(user);
+    }
 
-    public void saveUser1(@RequestBody User user) {
-        repository.save(user);
-        return;
+    @DeleteMapping(path = "/delete/{id}")
+    public void deleteUser(long id){
+        repository.deleteById(id);
     }
 
 }
