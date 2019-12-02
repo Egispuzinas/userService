@@ -1,5 +1,6 @@
 package com.userService.userService.entities;
 
+import com.userService.userService.controller.OtpGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.annotation.CreatedDate;
@@ -36,6 +37,10 @@ public class User {
 
     @Column(name = "f_phone")
     private int phone;
+
+    @Column(name = "f_otp")
+    private String otp;
+
     //Default konstruktorius
     public User(){}
 
@@ -84,12 +89,24 @@ public class User {
         this.date_modified = date_modified;
     }
 
-    public User(Long id, String name, LocalDateTime date, LocalDateTime date_modified, int phone) {
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        OtpGenerator otp1 = new OtpGenerator();
+        this.otp = otp1.getOtp();
+
+
+    }
+
+    public User(Long id, String name, LocalDateTime date, LocalDateTime date_modified, int phone, String otp) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.date_modified = date_modified;
         this.phone = phone;
+        this.otp = otp;
     }
 
     @Override
