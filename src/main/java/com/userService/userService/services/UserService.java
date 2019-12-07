@@ -1,9 +1,8 @@
 package com.userService.userService.services;
 
 
-import com.userService.userService.controller.OtpGenerator;
 import com.userService.userService.controller.models.ExternalUser;
-import com.userService.userService.entities.User;
+import com.userService.userService.repository.entities.User;
 import com.userService.userService.repository.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;

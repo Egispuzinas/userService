@@ -1,6 +1,6 @@
 package com.userService.userService.controller.models;
 
-import com.userService.userService.entities.User;
+import com.userService.userService.repository.entities.User;
 
 import java.time.LocalDateTime;
 

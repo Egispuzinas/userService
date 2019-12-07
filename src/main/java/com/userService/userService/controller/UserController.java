@@ -1,8 +1,9 @@
 package com.userService.userService.controller;
 
 import com.userService.userService.controller.models.ExternalUser;
-import com.userService.userService.entities.User;
+import com.userService.userService.repository.entities.User;
 import com.userService.userService.repository.UserRepository;
+import com.userService.userService.services.OtpGenerator;
 import com.userService.userService.services.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

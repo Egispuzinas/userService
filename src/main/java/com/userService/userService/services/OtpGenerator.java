@@ -1,8 +1,5 @@
-package com.userService.userService.controller;
+package com.userService.userService.services;
 
-import com.userService.userService.entities.User;
-
-import java.util.Arrays;
 import java.util.Random;
 
 public class OtpGenerator {

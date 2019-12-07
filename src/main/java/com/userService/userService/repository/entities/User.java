@@ -1,4 +1,4 @@
-package com.userService.userService.entities;
+package com.userService.userService.repository.entities;
 
 import com.userService.userService.controller.models.ExternalUser;
 import org.springframework.data.annotation.CreatedDate;
