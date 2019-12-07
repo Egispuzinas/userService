@@ -1,5 +1,6 @@
 package com.userService.userService.entities;
 
+import com.userService.userService.controller.models.ExternalUser;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -40,6 +41,15 @@ public class User {
 
 	//Default konstruktorius
 	public User() {
+	}
+
+	public User(ExternalUser ext) {
+		this.id = ext.getId();
+		this.name = ext.getName();
+		this.date = ext.getDate();
+		this.date_modified = ext.getDate_modified();
+		this.phone = ext.getPhone();
+		this.otp = ext.getOtp();
 	}
 
 	public String getName() {
@@ -120,6 +130,9 @@ public class User {
 		return phoneUtil.isValidNumber(ltNumberProto);
 	}
 
+	public static ExternalUser toExternal(User user) {
+		return new ExternalUser(user);
+	}
 
 	@Override
 	public String toString() {
