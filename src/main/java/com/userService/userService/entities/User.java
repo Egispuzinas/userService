@@ -1,17 +1,11 @@
 package com.userService.userService.entities;
 
-import com.userService.userService.controller.OtpGenerator;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.beans.BeanProperty;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 @Entity
@@ -94,10 +88,7 @@ public class User {
     }
 
     public void setOtp(String otp) {
-        OtpGenerator otp1 = new OtpGenerator();
-        this.otp = otp1.getOtp();
-
-
+        this.otp = otp;
     }
 
     public User(Long id, String name, LocalDateTime date, LocalDateTime date_modified, int phone, String otp) {
@@ -119,6 +110,4 @@ public class User {
                 ", phone=" + phone +
                 '}';
     }
-
-
 }

@@ -44,10 +44,15 @@ public class UserController {
         OtpGenerator otp = new OtpGenerator();
         return repository.findById(id)
                 .map(user1 -> {
-                    user1.setOtp(user.getOtp());
+                    user1.setOtp(otp.getOtp());
                     return repository.save(user1);
                 }).orElseThrow (() -> new NotFoundException("User not found with id" + id));
 
     }
 
+    @GetMapping("/generateOtp")
+    public String generateOtp(){
+        OtpGenerator otp = new OtpGenerator();
+        return otp.getOtp();
+    };
 }
