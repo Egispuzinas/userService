@@ -7,6 +7,8 @@ import com.userService.userService.repository.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -17,17 +19,13 @@ public class UserService {
 	}
 
 	public void createUser(ExternalUser externalUser) {
+		externalUser.setPhone(FormatPhone.formatPhone(externalUser.getPhone()));
 		User user = ExternalUser.toInternal(externalUser);
 		userRepository.save(user);
 	}
 
-	public NotFoundException deleteById(long id) {
-		try {
-			userRepository.deleteById(id);
-		} catch (Exception e) {
-			return new NotFoundException("User not found with id" + id);
-		}
-		return null;
+	public void deleteById(long id) {
+		userRepository.deleteById(id);
 	}
 
 	public User setOtpPsw(ExternalUser externalUser) throws NotFoundException {
@@ -40,5 +38,14 @@ public class UserService {
 
 	public User searchbyId(long id) {
 		return userRepository.findById(id);
+	}
+
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	public User updateUser(ExternalUser externalUser) {
+		User user = ExternalUser.toInternal(externalUser);
+		return userRepository.save(user);
 	}
 }

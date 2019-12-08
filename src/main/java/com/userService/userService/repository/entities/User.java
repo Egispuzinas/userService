@@ -82,10 +82,7 @@ public class User {
 	}
 
 	public void setPhone(String phone) {
-		if (validatePhone(phone)) {
-			this.phone =phone;
-		} else
-			System.out.println("phone number invalid");
+		this.phone = phone;
 	}
 
 	public void setId(Long id) {
@@ -117,18 +114,6 @@ public class User {
 		this.otp = otp;
 	}
 
-	private boolean validatePhone(String phone) {
-
-		PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-		Phonenumber.PhoneNumber ltNumberProto = null;
-		try {
-			ltNumberProto = phoneUtil.parse(phone, "LT");
-
-		} catch (NumberParseException e) {
-            System.err.println("NumberParseException was thrown: " + e.toString());
-		}
-		return phoneUtil.isValidNumber(ltNumberProto);
-	}
 
 	public static ExternalUser toExternal(User user) {
 		return new ExternalUser(user);

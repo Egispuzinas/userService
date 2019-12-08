@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -22,42 +23,35 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@GetMapping("/hello")
-	public static String gethello() {
-		return "Hello World";
-	}
-
-	@GetMapping("/search/{id}")
+	@GetMapping("/user/search/{id}")
 	public User search(@PathVariable long id) {
-		return  userService.searchbyId(id);
+		return userService.searchbyId(id);
 	}
 
-	@PostMapping(path = "/insertuser/", consumes = "application/json", produces = "application/json")
+	@PostMapping(path = "/user/insertuser/", consumes = "application/json", produces = "application/json")
 	public void saveUser(@RequestBody ExternalUser externalUser) {
 		userService.createUser(externalUser);
 	}
 
-	@DeleteMapping(path = "/delete/{id}")
-	public NotFoundException deleteUser(long id) {
+	@DeleteMapping(path = "/user/delete/{id}")
+	public void deleteUser(@PathVariable long id) {
 		userService.deleteById(id);
-		try {
-			userService.deleteById(id);
-		} catch (Exception e) {
-			return new NotFoundException("User not found with id" + id);
-		}
-		return null;
 	}
 
-	@PutMapping(path = "/setOtpPassword", consumes = "application/json", produces = "application/json")
+	@PutMapping(path = "/user/setOtpPassword", consumes = "application/json", produces = "application/json")
 	public void setOtpPassword(@Valid @RequestBody ExternalUser externalUser) throws NotFoundException {
-		 userService.setOtpPsw(externalUser);
+		userService.setOtpPsw(externalUser);
 	}
 
-	@GetMapping("/generateOtp")
-	public String generateOtp() {
-		OtpGenerator otp = new OtpGenerator();
-		return otp.getOtp();
+	@GetMapping("/user/getAllUsers")
+	public List<User> getAllUsers() {
+		return userService.findAll();
 	}
 
-	;
+	@PutMapping(path = "/user/updateUser", consumes = "application/json", produces = "application/json")
+	public void updateUser(@Valid @RequestBody ExternalUser externalUser) throws NotFoundException {
+		userService.updateUser(externalUser);
+	}
+
+
 }
